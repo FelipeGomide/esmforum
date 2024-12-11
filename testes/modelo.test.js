@@ -23,3 +23,23 @@ test('Testando cadastro de três perguntas', () => {
   expect(perguntas[2].num_respostas).toBe(0);
   expect(perguntas[1].id_pergunta).toBe(perguntas[2].id_pergunta-1);
 });
+
+test('Testando cadastro de respostas', () => {
+  p = modelo.cadastrar_pergunta('Qual sua música favorita?');
+  modelo.cadastrar_resposta(p, 'Sultans of Swing');
+  modelo.cadastrar_resposta(p, 'Scar Tissue');
+  modelo.cadastrar_resposta(p, 'Lithium');
+
+  const respostas = modelo.get_respostas(p);
+  expect(modelo.get_num_respostas(p)).toBe(3);
+  expect(respostas[0].texto).toBe('Sultans of Swing');
+  expect(respostas[1].texto).toBe('Scar Tissue');
+  expect(respostas[2].texto).toBe('Lithium');
+});
+
+test('Testando get_pergunta', () => {
+  p = modelo.cadastrar_pergunta("1 + 1?")
+  a = modelo.get_pergunta(p)
+
+  expect(a == p)
+});
